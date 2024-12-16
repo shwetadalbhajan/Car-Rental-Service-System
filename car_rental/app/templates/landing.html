@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveEase - Premium Car Rentals</title>
+    <!-- Link to Google Fonts for elegant fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/038/811/134/small_2x/ai-generated-beautiful-background-for-car-rental-advertising-free-photo.jpeg') no-repeat center center/cover;
+            height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Background Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Darker overlay for better contrast */
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            margin: 0;
+        }
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        header nav a:hover {
+            background-color: #d4af37; /* Gold hover effect */
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: auto;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+        }
+
+        .hero p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .cta-buttons a {
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            padding: 18px 45px;
+            border-radius: 50px;
+            background: linear-gradient(145deg, #2C3E50, #34495E); /* Gradient effect */
+            color: #fff;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-buttons a:hover {
+            background: linear-gradient(145deg, #d4af37, #d39f3e); /* Gold gradient for hover */
+            transform: translateY(-5px);
+            box-shadow: 0 12px 18px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-buttons a:active {
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Applying animation to the hero section */
+        .hero h2, .hero p {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            /* Header */
+            header {
+                padding: 15px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header h1 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            header nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            /* Hero Section */
+            .hero h2 {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .cta-buttons a {
+                font-size: 1.2rem;
+                padding: 15px 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Header */
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            /* Hero Section */
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .cta-buttons a {
+                font-size: 1.1rem;
+                padding: 12px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>DriveEase</h1>
+        <nav>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'contact' %}">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h2>Drive with Elegance</h2>
+        <p>Discover luxury cars and experience a ride like no other. Your next adventure begins here.</p>
+        <div class="cta-buttons">
+            <a href="{% url 'home' %}">Discover Cars</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - DriveEase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/038/811/134/small_2x/ai-generated-beautiful-background-for-car-rental-advertising-free-photo.jpeg') no-repeat center center/cover;
+            height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            margin-bottom: 50px; /* Added margin to create space between the header and the content */
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; /* Increased font size for the header */
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            margin: 0;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a,
+        header a {
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem; /* Increased font size */
+            color: #fff;
+            padding: 15px 25px; /* Increased padding */
+            border-radius: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        header nav a:hover,
+        header a:hover {
+            background-color: #d4af37;
+            color: #000;
+            border-color: #fff;
+        }
+
+
+        .main {
+            padding: 100px 20px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        .messages {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .messages .success {
+            color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .form-container,
+        .info-container {
+            flex: 1;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container:hover,
+        .info-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container h2,
+        .info-container h2 {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        .form-container input:focus,
+        .form-container textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            transform: scale(1.02);
+        }
+
+        .form-container button {
+            padding: 15px;
+            font-size: 1.1rem;
+            color: #fff;
+            background: #d4af37;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background: #fff;
+            color: #d4af37;
+        }
+
+        .info-container p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .info-container strong {
+            color: #d4af37;
+        }
+
+        .map {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            .form-container,
+            .info-container {
+                max-width: 90%;
+            }
+
+            .form-container h2,
+            .info-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .form-container input,
+            .form-container textarea {
+                font-size: 0.95rem;
+                padding: 12px;
+            }
+
+            .form-container button {
+                font-size: 1rem;
+            }
+
+            .messages .success {
+                font-size: 0.9rem;
+                width: 90%;
+            }
+
+            .container {
+                gap: 20px;
+                flex-direction: column;
+            }
+
+            .map iframe {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header a {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .form-container input,
+            .form-container textarea {
+                font-size: 0.9rem;
+            }
+
+            .form-container button {
+                font-size: 0.95rem;
+            }
+
+            .info-container p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>DriveEase</h1>
+    <a href="{% url 'landing' %}">Back</a>
+</header>
+
+<main class="main">
+    <div class="container">
+        <!-- Contact Form -->
+        <div class="form-container">
+            <h2>Contact Us</h2>
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="tel" name="phone" placeholder="Your Phone Number" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="info-container">
+            <h2>Contact Information</h2>
+            <p><strong>Address:</strong> Marol Naka, Mumbai, India</p>
+            <p><strong>Email:</strong> support@driveease.com</p>
+            <p><strong>Phone:</strong> +91 88506 46341</p>
+            <div class="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.509376184383!2d72.86537291461273!3d19.09978148708773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b68a595d903b%3A0xb6b19a7c1a83a4ee!2sMarol%20Naka%2C%20Marol%2C%20Andheri%20East%2C%20Mumbai%2C%20Maharashtra%20400059%2C%20India!5e0!3m2!1sen!2sin!4v1686224099507!5m2!1sen!2sin"
+                    loading="lazy" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveEase - Car Rental</title>
+    <style>
+        /* Reset and General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/038/811/134/small_2x/ai-generated-beautiful-background-for-car-rental-advertising-free-photo.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Make scrollbar almost invisible */
+        ::-webkit-scrollbar {
+            width: 8px; /* Set the width of the scrollbar */
+            height: 8px; /* Set the height of the horizontal scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent scrollbar thumb */
+            border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent; /* Make the scrollbar track invisible */
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            box-shadow: none; /* Fully transparent header */
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        header nav a:hover {
+            background-color: #d4af37;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            margin-top: 70px;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Dynamic Message Styles */
+        .messages .error {
+            color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.1);
+            padding: 8px 15px; /* Smaller padding */
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto; /* Center the message and add a smaller margin */
+            width: 80%; /* Limit the width */
+            max-width: 400px; /* Maximum width */
+        }
+
+        .messages .success {
+            color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 8px 15px; /* Smaller padding */
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto; /* Center the message and add a smaller margin */
+            width: 80%; /* Limit the width */
+            max-width: 400px; /* Maximum width */
+        }
+
+        /* Search Bar */
+        .search-bar-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto 40px;
+        }
+
+        .search-bar-container input[type="text"] {
+            padding: 12px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            border: 2px solid #fff;
+            width: 300px;
+            transition: width 0.3s ease;
+        }
+
+        .search-bar-container input[type="text"]:focus {
+            width: 350px;
+        }
+
+        .search-bar-container button {
+            padding: 12px 25px;
+            background-color: #d4af37;
+            color: #000;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar-container button:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Car List Area */
+        .car-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .car-card {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .car-card h3,
+        .car-card p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .car-card a {
+            text-decoration: none; /* Removed underline */
+            color: inherit;
+        }
+
+        .car-card .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .car-card .action-buttons a {
+            width: 48%;
+        }
+
+        .car-card .action-buttons button {
+            width: 100%;
+            padding: 12px;
+            background-color: #d4af37;
+            border: none;
+            color: #000;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .car-card .action-buttons button:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .pagination .step-links a,
+        .pagination .step-links span {
+            font-size: 1rem;
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination .step-links a:hover {
+            background-color: #d4af37;
+        }
+
+        .pagination .current {
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .car-list {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .car-card img {
+                height: 180px;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            header nav {
+                gap: 15px;
+            }
+
+            header nav a {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .car-list {
+                grid-template-columns: 1fr;
+            }
+
+            .car-card img {
+                height: 160px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header nav a {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+
+            .search-bar-container input[type="text"] {
+                width: 250px;
+                font-size: 1rem;
+            }
+
+            .search-bar-container button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .pagination .step-links a,
+            .pagination .step-links span {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DriveEase</h1>
+        <nav>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'view_wishlist' %}">Wishlist</a>
+            <a href="{% url 'booking_history' %}">Booking History</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+        {% if request.user.is_authenticated %}
+        Welcome, {{ request.user.name }}!
+        {% else %}
+        Welcome to DriveEase!
+        {% endif %}
+    </div>
+
+    <!-- Dynamic Message -->
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container">
+        <form method="GET" action="{% url 'home' %}">
+            <input type="text" name="search" value="{{ request.GET.search }}" placeholder="Search cars..." />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Car List -->
+    <div class="car-list">
+        {% for car in page_obj %}
+            <div class="car-card">
+                <a href="{% url 'car_detail' car.id %}">
+                    <img src="{{ car.image_url }}" alt="{{ car.brand }} {{ car.model }}">
+                    <h3>{{ car.brand }} {{ car.model }}</h3>
+                    <p><strong>Price:</strong> ₹{{ car.rent_per_hour }} per hour</p>
+                    <p><strong>Seats:</strong> {{ car.seating_capacity }} Seats</p>
+                </a>
+                <div class="action-buttons">
+                    <a href="{% url 'add_to_wishlist' car.id %}">
+                        <button>Add to Wishlist</button>
+                    </a>
+                    <a href="{% url 'book_car' car.id %}">
+                        <button>Book Now</button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <div class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

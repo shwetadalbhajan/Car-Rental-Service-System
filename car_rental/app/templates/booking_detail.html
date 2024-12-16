@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Details</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: url('https://static.vecteezy.com/system/resources/thumbnails/038/811/134/small_2x/ai-generated-beautiful-background-for-car-rental-advertising-free-photo.jpeg') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Background Overlay */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+    }
+
+    /* Make scrollbar almost invisible */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Header */
+    header {
+        width: 100%;
+        padding: 20px 40px;
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        box-shadow: none;
+    }
+
+    header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 2px;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    header nav {
+        display: flex;
+        gap: 30px;
+    }
+
+    header nav a {
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 30px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    header nav a:hover {
+        background-color: #d4af37;
+        color: #000;
+        border-color: #fff;
+    }
+
+    /* Main Container */
+    .main {
+        padding: 120px 20px 50px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* Booking Details Container */
+    .booking-detail {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        margin-bottom: 40px;
+        transition: transform 0.3s ease;
+    }
+
+    .booking-detail:hover {
+        transform: scale(1.05);
+    }
+
+    .booking-detail h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Booking Details Section */
+    .detail-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .detail-section div {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        color: #e1e1e1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        transition: background 0.3s ease;
+    }
+
+    .detail-section div:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+    }
+
+    .detail-section div span {
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    /* Car Details Section */
+    .car-details {
+        margin-top: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .car-details:hover {
+        transform: scale(1.05);
+    }
+
+    .car-details h3 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .car-details div {
+        font-size: 1.2rem;
+        color: #e1e1e1;
+        margin-bottom: 10px;
+    }
+
+    .car-details div span {
+        font-weight: 700;
+        color: #d4af37;
+    }
+
+    /* Image size reduction */
+    .car-image {
+        margin-top: 20px;
+        display: block;
+        width: 70%;
+        height: auto;
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Price Section */
+    .price {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #d4af37;
+        margin-top: 30px;
+        text-align: center;
+        border-top: 2px solid #d4af37;
+        padding-top: 20px;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .main {
+            padding: 100px 20px 20px;
+        }
+
+        .booking-detail h2 {
+            font-size: 2rem;
+        }
+
+        .detail-section div,
+        .car-details div {
+            font-size: 1rem;
+        }
+
+        .car-details h3 {
+            font-size: 1.5rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+        }
+
+        .car-image {
+            width: 90%;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DriveEase</h1>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'view_wishlist' %}">Wishlist</a>
+        <a href="{% url 'booking_history' %}">Booking History</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+  </header>
+
+  <div class="main">
+    <div class="booking-detail">
+        <h2>Booking Details</h2>
+
+        <div class="detail-section">
+            <div><span>Booking ID:</span> {{ booking.id }}</div>
+            <div><span>Car:</span> {{ booking.car.brand }} {{ booking.car.model }}</div>
+            <div><span>User:</span> {{ booking.user.name }}</div>
+            <div><span>Phone:</span> {{ booking.phone }}</div>
+            <div><span>Booking Date:</span> {{ booking.date }}</div>
+            <div><span>Start Time:</span> {{ booking.start_time }}</div>
+            <div><span>Duration:</span> {{ booking.hours }} hours</div>
+            <div><span>Driver Needed:</span> {% if booking.driver_needed %} Yes {% else %} No {% endif %}</div>
+            <div><span>Address:</span> {{ booking.address }}</div>
+        </div>
+
+        <div class="car-details">
+            <h3>Car Details</h3>
+            <div><span>Brand:</span> {{ booking.car.brand }}</div>
+            <div><span>Model:</span> {{ booking.car.model }}</div>
+            <div><span>Price per Hour:</span> ₹{{ booking.car.rent_per_hour }}</div>
+            <img class="car-image" src="{{ booking.car.image_url }}" alt="{{ booking.car.brand }} {{ booking.car.model }}">
+        </div>
+
+        <div class="price">Total Price: ₹{{ booking.total_price }}</div>
+    </div>
+  </div>
+
+</body>
+</html>

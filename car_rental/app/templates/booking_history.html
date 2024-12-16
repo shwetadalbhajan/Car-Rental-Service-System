@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Booking History</title>
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body */
+    body {
+        font-family: 'Lora', serif;
+        background: url('https://static.vecteezy.com/system/resources/thumbnails/038/811/134/small_2x/ai-generated-beautiful-background-for-car-rental-advertising-free-photo.jpeg') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Background Overlay */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+    }
+
+    /* Header */
+    header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 2px;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        margin: 0;
+    }
+
+    header nav {
+        display: flex;
+        gap: 30px;
+    }
+
+    header nav a {
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.2rem;
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 30px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    header nav a:hover {
+        background-color: #d4af37;
+        color: #000;
+        border-color: #fff;
+    }
+    ::-webkit-scrollbar {
+        width: 8px; /* Set the width of the scrollbar */
+        height: 8px; /* Set the height of the horizontal scrollbar */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent scrollbar thumb */
+        border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent; /* Make the scrollbar track invisible */
+    }
+
+    /* Main content */
+    .main {
+        padding: 120px 20px 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .main h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* Booking History Section */
+    .history-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .history-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        width: 75%;
+        border: 4px solid #d4af37;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+        position: relative;
+    }
+
+    .history-card::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        width: calc(100% + 16px);
+        height: calc(100% + 16px);
+        border: 2px solid #d4af37;
+        border-radius: 20px;
+        z-index: -1;
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+    }
+
+    .history-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .history-card:hover::before {
+        opacity: 1;
+    }
+
+    .history-card .details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .history-card a {
+            text-decoration: none; /* Removed underline */
+            color: inherit;
+        }
+
+    .history-card .details h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #e1e1e1;
+    }
+
+    .history-card .details p {
+        font-size: 1.1rem;
+        color: #e1e1e1;
+    }
+
+    .history-card .price {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #e1e1e1;
+        margin-top: 12px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header nav a {
+            font-size: 1rem;
+            padding: 8px 20px;
+        }
+
+        .main {
+            padding: 80px 20px 20px;
+            gap: 30px;
+        }
+
+        .main h1 {
+            font-size: 1.8rem;
+        }
+
+        .history-section {
+            gap: 30px;
+            justify-content: flex-start;
+        }
+
+        .history-card {
+            width: 100%;
+        }
+
+        .history-card .details h3 {
+            font-size: 1.4rem;
+        }
+
+        .history-card .details p {
+            font-size: 1rem;
+        }
+
+        .history-card .price {
+            font-size: 1.5rem;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DriveEase</h1>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'view_wishlist' %}">Wishlist</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+  </header>
+
+  <div class="main">
+    <h1>Your Booking History</h1>
+
+    <div class="history-section">
+        {% for record in history %}
+        <div class="history-card">
+            <a href="{% url 'booking_detail' record.id %}">
+            <div class="details">
+                <h3>{{ record.car.brand }} {{ record.car.model }}</h3>
+                <p>Date: {{ record.date }} | Hours: {{ record.hours }}</p>
+            </div>
+            <div class="price">₹{{ record.total_price }}</div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+
+</body>
+</html>

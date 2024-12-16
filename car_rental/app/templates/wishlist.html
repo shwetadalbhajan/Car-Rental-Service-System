@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Wishlist</title>
+    <style>
+        /* Reset and General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Make scrollbar almost invisible */
+        ::-webkit-scrollbar {
+            width: 8px; /* Set the width of the scrollbar */
+            height: 8px; /* Set the height of the horizontal scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent scrollbar thumb */
+            border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent; /* Make the scrollbar track invisible */
+        }
+
+        /* Body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/038/811/134/small_2x/ai-generated-beautiful-background-for-car-rental-advertising-free-photo.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            background-color: transparent; /* Fully transparent */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            box-shadow: none; /* Removed shadow for transparent header */
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        header nav a:hover {
+            background-color: #d4af37;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Dynamic Message Styles */
+        .messages .error {
+            color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.1);
+            padding: 8px 15px; /* Smaller padding */
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto; /* Center the message and add a smaller margin */
+            width: 80%; /* Limit the width */
+            max-width: 400px; /* Maximum width */
+        }
+
+        .messages .success {
+            color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1);
+            padding: 8px 15px; /* Smaller padding */
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px auto; /* Center the message and add a smaller margin */
+            width: 80%; /* Limit the width */
+            max-width: 400px; /* Maximum width */
+        }
+
+        /* Wishlist Header */
+        h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Wishlist Container */
+        .wishlist {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none; /* Remove text decoration */
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card h3,
+        .card p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .card a {
+            text-decoration: none; /* Removed underline */
+            color: inherit;
+        }
+
+        .card .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .card .action-buttons button {
+            width: 100%;
+            padding: 12px;
+            background-color: #d4af37;
+            border: none;
+            color: #000;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card .action-buttons button:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .wishlist {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card img {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wishlist {
+                grid-template-columns: 1fr;
+            }
+
+            .card img {
+                height: 160px;
+            }
+        }
+
+        /* Empty Wishlist Message */
+        .empty-wishlist {
+            font-size: 1.5rem;
+            color: #fff;
+            width: 100%;
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DriveEase</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'booking_history' %}">Booking History</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Dynamic Message Below the Header -->
+    <div style="margin-top: 100px;">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Wishlist Header -->
+    <h2>Your Wishlist</h2>
+
+    <!-- Wishlist Items -->
+    <div class="wishlist">
+        {% for item in wishlist_cars %}
+                <div class="card">
+                    <a href="{% url 'car_detail' item.car.id %}">
+                    <img src="{{ item.car.image_url }}" alt="{{ item.car.brand }} {{ item.car.model }}">
+                    <h3>{{ item.car.brand }} {{ item.car.model }}</h3>
+                    <p>Rent per Hour: ₹{{ item.car.rent_per_hour }}</p>
+                    <p>Seating Capacity: {{ item.car.seating_capacity }}</p>
+                    <div class="action-buttons">
+                        <a href="#">
+                            <button type="button">Book Now</button>
+                        </a>
+                        <a href="{% url 'remove_from_wishlist' item.car.id %}">
+                            <button type="button">Remove from Wishlist</button>
+                        </a>
+                    </div>
+                    </a>
+                </div>
+        {% empty %}
+            <p class="empty-wishlist">Your wishlist is empty!</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
